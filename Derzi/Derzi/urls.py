@@ -16,9 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
+from paltar import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include("account.urls")),
     path("paltar/", include("paltar.urls")),
+    path("", views.IndexView.as_view(), name = "index"),
+    path('about_us/', views.AboutView.as_view(), name ="about_us"),
+    path('contact/', views.ContactUsView.as_view(), name = "contact"),
+    path('products/', views.ProductsView.as_view(), name = 'products'),
 ]
+
+urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns+=static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+

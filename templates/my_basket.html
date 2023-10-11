@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Basketitems{% endblock %}
+
+{% block header_background_content %}Menim sebetim{% endblock %}
+
+{% block content %}
+
+
+    <main>
+        <section>
+            <h4 style="margin:50px">Basket Items</h4>
+            <div class="grid_container">
+                {% for basketitem in basketitems %}
+                <div class="grid_box">
+                    {% if basketitem.product.image %}
+                    <img src= "{{ basketitem.product.image.url }}" alt="img">
+                    {% else %}
+                    {% endif %}
+                    <p class="title">{{ basketitem.product.title }}</p>
+                    <span class="price">{{ basketitem.product.price }} AZN</span>
+                    <div class="select_size">
+                    <p> Size: {{ basketitem.size }} Color: {{ basketitem.color }} Quantity: {{ basketitem.quantity }} </p>
+                    </div>
+                    <div class="">
+                        <a href="{% url 'delete_item' basketitem.id %}" style="background-color: black; color: white; padding:10px; display:block; margin-bottom: 10px; text-decoration: none; text-align: center;">
+                            Səbətdən sil
+                        </a>
+                        <a href="{% url 'order_item' basketitem.id %}" style="background-color: black; color: white; padding:10px; display:block; text-decoration: none; text-align: center;">
+                            Mehsulu sifaris et
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        <section>
+            <h4 style="margin:50px">Order Items</h4>
+            <div class="grid_container">
+                {% for orderitem in orderitems %}
+                <div class="grid_box">
+                    {% if orderitem.product.image %}
+                    <img src= "{{ orderitem.product.image.url }}" alt="img">
+                    {% else %}
+                    {% endif %}
+                    <p class="title">{{ orderitem.product.title }}</p>
+                    <span class="price">{{ orderitem.product.price }} AZN</span>
+                    <div class="select_size">
+                    <p> Size: {{ orderitem.size }} Color: {{ orderitem.color }} Quantity: {{ orderitem.quantity }} </p>
+                    </div>
+                    <div class="select_size">
+                    {% if orderitem.d_status == "UD" %}
+                    <p> Order Status: Chatdirilmayib </p>
+                    {% else %}
+                    <p> Order Status: Chatdirilib </p>
+                    {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+{% endblock %}

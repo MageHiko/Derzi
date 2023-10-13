@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Dressmaker{% endblock %}
+
+{% block header_background_content %}Paltar yarat{% endblock %}
+
+{% block content %}
+
+{% block css %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> {% endblock %}
+<div class = "container my-5">
+    <h1 class="mt-5"> Create Product</h1>
+    <form class = "mt-5" style="font-size: 200%;" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Title</label>
+        <input type="text" name = 'title' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail2" class="form-label">Image</label>
+            <input type="file" name = 'image'  class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail3" class="form-label">Price</label>
+            <input type="text" name = 'price' class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail4" class="form-label">Categories</label>
+            <select class="form-control" name = 'categories'  id="exampleInputEmail4" aria-describedby="emailHelp">
+                {% for category in categories %}
+                <option value = "{{ category.id }}"> {{category.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail5" class="form-label">About</label>
+            <textarea class="form-control" name = 'about' id="exampleInputEmail5" aria-describedby="emailHelp"> </textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+{% endblock %}
+
+{% block js %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> {% endblock %}

@@ -142,5 +142,35 @@ class OrderItemView(View):
         basketitem.save()
 
         return redirect("my_basket")
+    
+class DressmakerView(View):
+    def get(self, request, *args, **kwargs):
+        if request.user.is_staff:
+            categories = CategoryModel.objects.all()
+            context = {
+                "categories": categories,
+            }
+            return render(request, "dressmaker.html", context)
+        else:
+            return Http404
+        
+    def post(self, request, *args, **kwargs):
+        title = request.POST.get("title")
+        image = request.FILES.get("image")
+        price = request.POST.get("price")
+        categories = request.POST.get("categories")
+        category = CategoryModel.objects.get(id=categories)
+        about = request.POST.get("price")
+
+        product = ProductModel.objects.create(
+            title=title,
+            image=image,
+            price=price,
+            about=about
+        )
+
+        product.categories.set([categories])
+
+        return redirect("index")
 
 # Create your views here.

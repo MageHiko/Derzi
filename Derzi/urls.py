@@ -31,6 +31,7 @@ urlpatterns = [
     path('contact/', views.ContactUsView.as_view(), name = "contact"),
     path('products/', views.ProductsView.as_view(), name = 'products'),
     path('my_basket/', views.MyBasketView.as_view(), name = 'my_basket'),
+    path('dressmaker/', views.DressmakerView.as_view(), name = 'derssmaker'),
     path('delete_item/<int:id>/', views.DeleteItemView.as_view(), name = 'delete_item'),
     path('order_item/<int:id>/', views.OrderItemView.as_view(), name = "order_item"),
     path('api-auth/', include('rest_framework.urls')),
